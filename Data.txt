@@ -1,0 +1,9 @@
+Computer log;10;0
+Tire change (Winter/Summer);30;0
+Repair puncture;30;1000
+Replace oils;20;15000
+Replace filters;40;6000
+Repair clutch;180;20000
+Repair brakes;60;13000
+Fill anti-ice liquid;15;7000
+Repair lights;20;3000

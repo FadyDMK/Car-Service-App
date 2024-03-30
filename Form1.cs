@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,28 @@ namespace Car_Service_App
         {
 
         }
+
+        private void EnableMenuItems()
+        {
+            worksheetToolStripMenuItem.Enabled = true;
+            paymentToolStripMenuItem.Enabled = true;
+
+        }
+
+        private void worksheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
 
 
 
@@ -62,6 +85,46 @@ namespace Car_Service_App
             const string title = "About";
             MessageBox.Show(current.ToString() + "\n"+neptunCode, title,MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+
+        private void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        //Get the path of specified file
+                        string filePath = openFileDialog.FileName;
+
+                        //Read the contents of the file into a stream
+
+                        var fileStream = openFileDialog.OpenFile();
+
+                        //using insures the correct use of the streamReader (disposes of the instance automatically)
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            string fileContent = reader.ReadToEnd();
+                        }
+
+                        EnableMenuItems();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
+                    MessageBox.Show("The File Has Loaded Successfully!","Done" , MessageBoxButtons.OK);
+
+                }
+            }
         }
     }
 }

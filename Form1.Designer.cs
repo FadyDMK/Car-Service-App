@@ -1,4 +1,6 @@
-﻿namespace Car_Service_App
+﻿using System;
+
+namespace Car_Service_App
 {
     partial class Form1
     {
@@ -52,7 +54,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(455, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(573, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -61,18 +63,23 @@
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
             this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.loadFileToolStripMenuItem.Text = "Load File";
+            this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
             // worksheetToolStripMenuItem
             // 
+            this.worksheetToolStripMenuItem.Enabled = false;
             this.worksheetToolStripMenuItem.Name = "worksheetToolStripMenuItem";
             this.worksheetToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
             this.worksheetToolStripMenuItem.Text = "Worksheet";
+            this.worksheetToolStripMenuItem.Click += new System.EventHandler(this.worksheetToolStripMenuItem_Click);
             // 
             // paymentToolStripMenuItem
             // 
+            this.paymentToolStripMenuItem.Enabled = false;
             this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
             this.paymentToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
             this.paymentToolStripMenuItem.Text = "Payment";
+            this.paymentToolStripMenuItem.Click += new System.EventHandler(this.paymentToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -93,11 +100,10 @@
             this.pictureBox1.Image = global::Car_Service_App.Properties.Resources.car_servcice;
             this.pictureBox1.Location = new System.Drawing.Point(0, 31);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(455, 365);
+            this.pictureBox1.Size = new System.Drawing.Size(573, 365);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Form1
             // 
@@ -105,7 +111,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(455, 393);
+            this.ClientSize = new System.Drawing.Size(573, 393);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -122,15 +128,17 @@
 
         }
 
+
+
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem loadFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem worksheetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem worksheetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
     }
 }
 
