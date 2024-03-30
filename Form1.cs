@@ -107,13 +107,17 @@ namespace Car_Service_App
 
                         var fileStream = openFileDialog.OpenFile();
 
-                        //using insures the correct use of the streamReader (disposes of the instance automatically)
-                        using (StreamReader reader = new StreamReader(fileStream))
-                        {
-                            string fileContent = reader.ReadToEnd();
-                        }
+                        Loader l = new Loader();
+                        StreamReader reader = l.loadFile(filePath);
+
+                        Parser parser = new Parser();
+                        parser.addWorks(reader);
 
                         EnableMenuItems();
+
+                        reader.Dispose();
+                        openFileDialog.Dispose();
+
                     }
                     catch (Exception ex)
                     {
@@ -121,6 +125,7 @@ namespace Car_Service_App
                     }
 
 
+                   
                     MessageBox.Show("The File Has Loaded Successfully!","Done" , MessageBoxButtons.OK);
 
                 }
