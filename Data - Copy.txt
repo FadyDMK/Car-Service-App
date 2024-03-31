@@ -1,0 +1,2 @@
+Computer log;10;0
+Tire change (Winter/Summer);30;0

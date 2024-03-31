@@ -9,15 +9,15 @@ namespace Car_Service_App
     public class Work
     {
         //Name of work; Required time in minutes; Material costs
-        public string name { set; get; }
-        public int time { set; get; }
-        public int materialCost { set; get; }
+        public string Service { set; get; }
+        public int Time { set; get; }
+        public int MaterialCost { set; get; }
 
 
-        public Work(string name,int time,int materialCost) {
-            this.name = name;
-            this.time = time;
-            this.materialCost = materialCost;
+        public Work(string service,int time,int materialCost) {
+            this.Service = service;
+            this.Time = time;
+            this.MaterialCost = materialCost;
         }
 
 
