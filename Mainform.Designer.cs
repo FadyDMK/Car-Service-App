@@ -2,7 +2,7 @@
 
 namespace Car_Service_App
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Car_Service_App
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.worksheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

@@ -12,9 +12,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Car_Service_App
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public List<Work> works = new List<Work>();
+
+
+
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -34,7 +38,9 @@ namespace Car_Service_App
 
         private void worksheetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Worksheet worksheet = new Worksheet();
+            worksheet.renderWorks(works);
+            worksheet.ShowDialog();
         }
 
         private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
@@ -111,7 +117,10 @@ namespace Car_Service_App
                         StreamReader reader = l.loadFile(filePath);
 
                         Parser parser = new Parser();
-                        parser.addWorks(reader);
+
+                        works = parser.addWorks(reader);
+
+                         
 
                         EnableMenuItems();
 
