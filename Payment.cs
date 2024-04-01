@@ -26,10 +26,20 @@ namespace Car_Service_App
         {
             //label5-8
             label5.Text = MainForm.totalSelectedWorks.ToString() + " db";
+            label5.ForeColor = Color.Orange;
+
             label6.Text = MainForm.totalMaterialCost.ToString() + " Ft";
+            label6.ForeColor = Color.Green;
+
             label7.Text = MainForm.totalTimeCost.ToString() + " Ft";
+            label7.ForeColor = Color.Red;
+
             label8.Text = MainForm.bigTotal.ToString() + " Ft";
+            label8.ForeColor = Color.CadetBlue;
+
             label10.Text = MainForm.NoWorksheets.ToString() + " db";
+            label10.ForeColor = Color.MediumPurple;
+
 
             //TODO u can use the worksheet button multiple times before
             //pressing the payment ADD THAT FEATURE
