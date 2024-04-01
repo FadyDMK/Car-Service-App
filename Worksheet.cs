@@ -126,7 +126,7 @@ namespace Car_Service_App
 
                 //Time required for the service
                 Label label2 = new Label();
-                label2.Text = works[i].Time.ToString() + "min" ;
+                label2.Text = works[i].Time.ToString() + " min" ;
                 label2.Size = new Size(100, 50);
                 label2.Location = new Point(160, label1.Location.Y);
                 panel1.Controls.Add(label2);
@@ -134,7 +134,7 @@ namespace Car_Service_App
 
                 //Material Cost
                 Label label3 = new Label();
-                label3.Text = works[i].MaterialCost.ToString();
+                label3.Text = works[i].MaterialCost.ToString() + " Ft";
                 label3.Size = new Size(100, 50);
                 label3.Location = new Point(label2.Location.X + 150, label1.Location.Y);
                 panel1.Controls.Add(label3);
@@ -148,8 +148,8 @@ namespace Car_Service_App
                 //total Cost
                 Label label41 = new Label();
                 double totalCost = works[i].MaterialCost + (15000/60) * works[i].Time;
-                label41.Text = totalCost.ToString();
-                label41.Size = new Size(100, 40);
+                label41.Text = totalCost.ToString() + " Ft";
+                label41.Size = new Size(80, 40);
                 label41.Location = new Point(label3.Location.X + 140, label1.Location.Y);
                 totalCostsLabels.Add(label41);
                 label41.Visible = false;
