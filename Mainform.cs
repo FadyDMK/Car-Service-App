@@ -45,16 +45,10 @@ namespace Car_Service_App
 
         private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Payment payment = new Payment();
+            payment.ShowDialog();
+         
         }
-
-
-
-
-
-
-
-
 
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

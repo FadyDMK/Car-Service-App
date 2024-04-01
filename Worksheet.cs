@@ -19,16 +19,76 @@ namespace Car_Service_App
         //Work Properties: Name of work; Required time in minutes; Material costs
         private List<Work> works = new List<Work>();
         private List<CheckBox> checkBoxes = new List<CheckBox>();
+        private List<Label> totalCostsLabels = new List<Label>();
 
-        private bool Saved = false;
+        private bool Saved ;
 
 
-        public static double sum = 0, materialCost = 0, timeCost = 0, numberOfCheck = 0;
+        public static double total = 0, materialCost = 0, timeCost = 0;
+        public static int selectedWorks = 0;
 
 
         public Worksheet()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Saved = true;
+            Calculate();
+            this.Close();
+        }
+
+        public void Reset()
+        {
+            materialCost = 0;
+            timeCost = 0;
+            selectedWorks = 0;
+        }
+
+        private void Calculate()
+        {
+            Reset();
+
+            for (int i = 0; i < works.Count; i++)
+            {
+                if (checkBoxes[i].Checked)
+                {
+                    selectedWorks++;
+
+                }
+            }
+            materialCost = Int32.Parse(this.label5.Text.Replace("Ft", "").Trim());
+            timeCost = Int32.Parse(this.label7.Text.Replace("Ft", "").Trim());
+            total = materialCost + timeCost;
+        }
+
+
+
+        private void Worksheet_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!Saved)
+            {
+                {
+                    const string message = "You didn't register this worksheet.\n Are you sure you want to close without saving?";
+                    const string caption = "Attention";
+                    var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        Saved = false;
+                    }
+                    else { e.Cancel = true; }
+                }
+
+            }
+        }
+
+        private void Worksheet_Load(object sender, EventArgs e)
+        {
+            Saved = false;
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -45,9 +105,12 @@ namespace Car_Service_App
         }
 
 
+
         internal void renderWorks(List<Work> works)
         {
             this.works = works;
+            label5.Text = "0" + " Ft";
+            label7.Text = "0" + " Ft";
             panel1.Controls.Clear();
             checkBoxes.Clear();
 
@@ -73,7 +136,7 @@ namespace Car_Service_App
                 Label label3 = new Label();
                 label3.Text = works[i].MaterialCost.ToString();
                 label3.Size = new Size(100, 50);
-                label3.Location = new Point(label2.Location.X + 150, label2.Location.Y);
+                label3.Location = new Point(label2.Location.X + 150, label1.Location.Y);
                 panel1.Controls.Add(label3);
 
 
@@ -83,14 +146,16 @@ namespace Car_Service_App
 
 
                 //total Cost
-                Label label4 = new Label();
+                Label label41 = new Label();
                 double totalCost = works[i].MaterialCost + (15000/60) * works[i].Time;
-                label4.Text = totalCost.ToString();
-                label4.Size = new Size(100, 50);
-                label4.Location = new Point(label3.Location.X + 140, label1.Location.Y);
-                label4.Text = totalCost.ToString();
-                label4.Visible = false;
-                panel1.Controls.Add(label4);
+                label41.Text = totalCost.ToString();
+                label41.Size = new Size(100, 40);
+                label41.Location = new Point(label3.Location.X + 140, label1.Location.Y);
+                totalCostsLabels.Add(label41);
+                label41.Visible = false;
+
+
+                panel1.Controls.Add(label41);
 
 
 
@@ -100,35 +165,44 @@ namespace Car_Service_App
                 checkBox.Location = new Point(label3.Location.X + 100, label1.Location.Y - 18);
 
                 // Add event handler for CheckedChanged event
-                checkBox.CheckedChanged += CheckBox_CheckedChanged;
+                checkBox.CheckedChanged += new EventHandler(CheckBox_Checked);
 
                 panel1.Controls.Add(checkBox);
                 checkBoxes.Add(checkBox);
-                
-
-
-
-
-
-
-
-
-
-
-
             }
 
         }
-        private void CheckBox_CheckedChanged(object sender, EventArgs e)
+
+
+        private void CheckBox_Checked(object sender, EventArgs e)
         {
             CheckBox chkBox = (CheckBox)sender;
+            double materialCost = 0, timeCost = 0;
+
+
             for (int i = 0; i < works.Count; i++)
             {
+                totalCostsLabels[i].Visible = false;
                 if (checkBoxes[i].Checked)
                 {
-                    label4.Visible = true;
+
+                    //All started 30 minutes are invoiced?
+                    if (works[i].Time % 30 == 0)
+                    {
+                        timeCost += (15000 / 60) * works[i].Time;
+                    }
+                    else
+                    {
+                        timeCost += (15000 / 2) * ((works[i].Time/30)+1);
+                    }
+
+                    totalCostsLabels[i].Visible = true;
+                    materialCost += works[i].MaterialCost;
                 }
             }
+            
+            label5.Text = materialCost.ToString() + " Ft";
+            label7.Text = timeCost.ToString() + " Ft";
         }
 
     }
