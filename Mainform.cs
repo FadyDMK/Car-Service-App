@@ -15,12 +15,25 @@ namespace Car_Service_App
     public partial class MainForm : Form
     {
         public List<Work> works = new List<Work>();
+        public static int NoWorksheets { get; set; }
+
+        public static double bigTotal = 0, totalMaterialCost = 0, totalTimeCost = 0;
+        public static int totalSelectedWorks = 0;
 
 
 
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        public void Reset()
+        {
+            bigTotal = 0; 
+            totalMaterialCost = 0; 
+            totalTimeCost = 0; 
+            totalSelectedWorks = 0;
+            NoWorksheets = 0;
         }
 
        
@@ -41,13 +54,15 @@ namespace Car_Service_App
             Worksheet worksheet = new Worksheet();
             worksheet.renderWorks(works);
             worksheet.ShowDialog();
+            NoWorksheets++;
         }
 
         private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Payment payment = new Payment();
             payment.ShowDialog();
-         
+            
+            Reset();
         }
 
 
@@ -112,7 +127,7 @@ namespace Car_Service_App
 
                         Parser parser = new Parser();
 
-                        works = parser.addWorks(reader);
+                        works = parser.AddWorks(reader);
 
                          
 

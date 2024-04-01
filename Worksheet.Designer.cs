@@ -151,6 +151,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Worksheet";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Worksheet_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Worksheet_FormClosed);
             this.Load += new System.EventHandler(this.Worksheet_Load);
             ((System.ComponentModel.ISupportInitialize)(this.worksheetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainformBindingSource)).EndInit();

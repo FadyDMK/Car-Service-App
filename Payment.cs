@@ -25,10 +25,11 @@ namespace Car_Service_App
         private void Payment_Load(object sender, EventArgs e)
         {
             //label5-8
-            label5.Text = Worksheet.selectedWorks.ToString() + "db";
-            label6.Text = Worksheet.materialCost.ToString() + "Ft";
-            label7.Text = Worksheet.timeCost.ToString() + "Ft";
-            label8.Text = Worksheet.total.ToString() + "Ft";
+            label5.Text = MainForm.totalSelectedWorks.ToString() + " db";
+            label6.Text = MainForm.totalMaterialCost.ToString() + " Ft";
+            label7.Text = MainForm.totalTimeCost.ToString() + " Ft";
+            label8.Text = MainForm.bigTotal.ToString() + " Ft";
+            label10.Text = MainForm.NoWorksheets.ToString() + " db";
 
             //TODO u can use the worksheet button multiple times before
             //pressing the payment ADD THAT FEATURE

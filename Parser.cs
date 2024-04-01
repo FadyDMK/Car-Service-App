@@ -10,7 +10,7 @@ namespace Car_Service_App
     public class Parser
     {
         private List<Work> works = new List<Work>();
-        public List<Work> addWorks(StreamReader reader) 
+        public List<Work> AddWorks(StreamReader reader) 
         {
             string line;
             string[] data;

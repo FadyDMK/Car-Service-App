@@ -20,6 +20,7 @@ namespace Car_Service_App
         private List<Work> works = new List<Work>();
         private List<CheckBox> checkBoxes = new List<CheckBox>();
         private List<Label> totalCostsLabels = new List<Label>();
+        private List<double> totalCostsValue = new List<double>();
 
         private bool Saved ;
 
@@ -40,7 +41,7 @@ namespace Car_Service_App
             this.Close();
         }
 
-        public void Reset()
+        public static void Reset()
         {
             materialCost = 0;
             timeCost = 0;
@@ -79,6 +80,7 @@ namespace Car_Service_App
                     if (result == DialogResult.Yes)
                     {
                         Saved = false;
+                        Reset();
                     }
                     else { e.Cancel = true; }
                 }
@@ -104,7 +106,14 @@ namespace Car_Service_App
             }
         }
 
-
+        private void Worksheet_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainForm.totalMaterialCost += materialCost;
+            MainForm.totalTimeCost += timeCost;
+            MainForm.bigTotal += total;
+            MainForm.totalSelectedWorks += selectedWorks;
+            Reset();
+        }
 
         internal void renderWorks(List<Work> works)
         {
@@ -148,11 +157,12 @@ namespace Car_Service_App
                 //total Cost
                 Label label41 = new Label();
                 double totalCost = works[i].MaterialCost + (15000/60) * works[i].Time;
-                label41.Text = totalCost.ToString() + " Ft";
+                label41.Text = "0 Ft";
                 label41.Size = new Size(80, 40);
                 label41.Location = new Point(label3.Location.X + 140, label1.Location.Y);
                 totalCostsLabels.Add(label41);
-                label41.Visible = false;
+                totalCostsValue.Add(totalCost);
+
 
 
                 panel1.Controls.Add(label41);
@@ -182,7 +192,7 @@ namespace Car_Service_App
 
             for (int i = 0; i < works.Count; i++)
             {
-                totalCostsLabels[i].Visible = false;
+
                 if (checkBoxes[i].Checked)
                 {
 
@@ -196,7 +206,7 @@ namespace Car_Service_App
                         timeCost += (15000 / 2) * ((works[i].Time/30)+1);
                     }
 
-                    totalCostsLabels[i].Visible = true;
+                    totalCostsLabels[i].Text = totalCostsValue[i].ToString() + " Ft";
                     materialCost += works[i].MaterialCost;
                 }
             }
