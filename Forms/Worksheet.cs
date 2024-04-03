@@ -27,6 +27,7 @@ namespace Car_Service_App
 
         public static double total = 0, materialCost = 0, timeCost = 0;
         public static int selectedWorks = 0;
+        public static int totalTimes = 0;
 
 
         public Worksheet()
@@ -112,6 +113,7 @@ namespace Car_Service_App
             MainForm.totalTimeCost += timeCost;
             MainForm.bigTotal += total;
             MainForm.totalSelectedWorks += selectedWorks;
+            MainForm.bigTotaltime += totalTimes;
             Reset();
         }
 
@@ -150,9 +152,6 @@ namespace Car_Service_App
 
 
                 
-
-
-
 
                 //total Cost
                 Label label41 = new Label();
@@ -208,6 +207,7 @@ namespace Car_Service_App
 
                     totalCostsLabels[i].Text = totalCostsValue[i].ToString() + " Ft";
                     materialCost += works[i].MaterialCost;
+                    totalTimes += works[i].Time;
                 }
             }
             

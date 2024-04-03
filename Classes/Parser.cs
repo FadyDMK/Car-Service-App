@@ -9,7 +9,6 @@ namespace Car_Service_App
 {
     public class Parser
     {
-        private List<Work> works = new List<Work>();
         public Work Parse(string line) 
         {
             string[] data;

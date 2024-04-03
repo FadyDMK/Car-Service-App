@@ -30,13 +30,5 @@ namespace Car_Service_App
             this.MaterialCost = materialCost;
         }
 
-
-
-
-
-
-
-
-
     }
 }

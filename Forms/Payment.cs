@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Car_Service_App
 {
@@ -40,9 +41,13 @@ namespace Car_Service_App
             label10.Text = MainForm.NoWorksheets.ToString() + " db";
             label10.ForeColor = Color.MediumPurple;
 
+            int hours = MainForm.bigTotaltime / 60;
+            int minutes = MainForm.bigTotaltime % 60;
+            label12.Text = hours.ToString() + ":" + minutes.ToString();
+
 
             //TODO u can use the worksheet button multiple times before
-            //pressing the payment ADD THAT FEATURE
+            //pressing the payment
             //payment should also mention how many times u used a worksheet to register work
 
 
