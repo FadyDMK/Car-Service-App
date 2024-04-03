@@ -15,11 +15,14 @@ namespace Car_Service_App
             string line;
             List<string> lines = new List<string>();
             Parser parser = new Parser();
+            List<Work> works = new List<Work>();
 
             while(!reader.EndOfStream)
             {
                 line = reader.ReadLine();
-                parser.Parse(line);
+                Work work = parser.Parse(line);
+                works.Add(work);
+
 
             }
         }
