@@ -9,10 +9,19 @@ namespace Car_Service_App
 {
     public class Loader
     {
-        public StreamReader LoadFile(string fileName)
+        public List<T> LoadFile<T>(string fileName)
         {
             StreamReader reader = new StreamReader(fileName);
-            return reader;
+            string line;
+            List<string> lines = new List<string>();
+            Parser parser = new Parser();
+
+            while(!reader.EndOfStream)
+            {
+                line = reader.ReadLine();
+                parser.Parse(line);
+
+            }
         }
     }
 }

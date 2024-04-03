@@ -10,18 +10,18 @@ namespace Car_Service_App
     public class Parser
     {
         private List<Work> works = new List<Work>();
-        public List<Work> AddWorks(StreamReader reader) 
+        public Work Parse(string row) 
         {
             string line;
             string[] data;
 
-            while(!reader.EndOfStream)
-            {
-                line = reader.ReadLine();
-                data = line.Split(';');
+            
+               
+                {data = line.Split(';');
                 Work addedWork = new Work(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]));
                 works.Add(addedWork);
-            }
+            
+            
             return works;
         }
 
