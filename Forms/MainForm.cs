@@ -113,30 +113,42 @@ namespace Car_Service_App
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                     
+
+					try
                     {
-                        //Get the path of specified file
-                        string filePath = openFileDialog.FileName;
+						//Get the path of specified file
+						string filePath = openFileDialog.FileName;
 
                         //Read the contents of the file into a stream
 
                         var fileStream = openFileDialog.OpenFile();
 
                         Loader l = new Loader();
-                        works = l.LoadFile<Work>(filePath);
+						
 
-                        EnableMenuItems(); 
-                        openFileDialog.Dispose();
+						works = l.LoadFile<Work>(filePath);
+                        
 
-                    }
+						openFileDialog.Dispose();
+
+					}
                     catch (Exception ex)
                     {
                         MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
+					if (works.Count == 0)
+					{
+						MessageBox.Show("File is Empty Please choose another File ! ");
+					}
+					else
+					{
+						MessageBox.Show("The File Has Loaded Successfully!", "Done", MessageBoxButtons.OK);
+						EnableMenuItems();
 
-                   
-                    MessageBox.Show("The File Has Loaded Successfully!","Done" , MessageBoxButtons.OK);
+					}
+
 
                 }
             }
