@@ -123,17 +123,9 @@ namespace Car_Service_App
                         var fileStream = openFileDialog.OpenFile();
 
                         Loader l = new Loader();
-                        StreamReader reader = l.LoadFile(filePath);
+                        works = l.LoadFile<Work>(filePath);
 
-                        Parser parser = new Parser();
-
-                        works = parser.AddWorks(reader);
-
-                         
-
-                        EnableMenuItems();
-
-                        reader.Dispose();
+                        EnableMenuItems(); 
                         openFileDialog.Dispose();
 
                     }

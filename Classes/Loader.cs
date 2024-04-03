@@ -25,6 +25,9 @@ namespace Car_Service_App
 
 
             }
-        }
+			reader.Dispose();
+			return new List<T>(works as IEnumerable<T>);
+
+		}
     }
 }

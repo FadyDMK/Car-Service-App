@@ -13,14 +13,8 @@ namespace Car_Service_App
         public Work Parse(string line) 
         {
             string[] data;
-
-            
-               
             data = line.Split(';');
-            Work addedWork = new Work(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]));
-            work.Add(addedWork);
-            
-            
+            Work work = new Work(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]));
             return work;
         }
 
