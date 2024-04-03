@@ -9,7 +9,7 @@ namespace Car_Service_App
 {
     public class Loader
     {
-        public StreamReader loadFile(string fileName)
+        public StreamReader LoadFile(string fileName)
         {
             StreamReader reader = new StreamReader(fileName);
             return reader;

@@ -68,7 +68,7 @@ namespace Car_Service_App
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+     
             if (ConfirmExit() == DialogResult.Yes)
             { Application.ExitThread(); }
         }
@@ -123,7 +123,7 @@ namespace Car_Service_App
                         var fileStream = openFileDialog.OpenFile();
 
                         Loader l = new Loader();
-                        StreamReader reader = l.loadFile(filePath);
+                        StreamReader reader = l.LoadFile(filePath);
 
                         Parser parser = new Parser();
 

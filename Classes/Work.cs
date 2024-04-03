@@ -9,9 +9,9 @@ namespace Car_Service_App
     public class Work
     {
         //Name of work; Required time in minutes; Material costs
-        public string Service { set; get; }
-        public int Time { set; get; }
-        public int MaterialCost { set; get; }
+        public string Service { private set; get; }
+        public int Time { private set; get; }
+        public int MaterialCost { private set; get; }
 
 
         public Work(string service,int time,int materialCost) {
