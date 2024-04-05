@@ -39,6 +39,7 @@ namespace Car_Service_App
         {
             Saved = true;
             Calculate();
+            MainForm.NoWorksheets++;
             this.Close();
         }
 
@@ -82,6 +83,7 @@ namespace Car_Service_App
                     {
                         Saved = false;
                         Reset();
+                        totalTimes = 0;
                     }
                     else { e.Cancel = true; }
                 }
@@ -96,25 +98,18 @@ namespace Car_Service_App
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox checkBox = (CheckBox)sender;
-            if (checkBox.Checked)
-            {
-                MessageBox.Show("Checkbox checked!");
-            }
-            else
-            {
-                MessageBox.Show("Checkbox unchecked!");
-            }
         }
 
         private void Worksheet_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainForm.totalMaterialCost += materialCost;
+            if(Saved)
+            {MainForm.totalMaterialCost += materialCost;
             MainForm.totalTimeCost += timeCost;
             MainForm.bigTotal += total;
             MainForm.totalSelectedWorks += selectedWorks;
             MainForm.bigTotaltime += totalTimes;
-            Reset();
+                Reset();
+            }
         }
 
         internal void renderWorks(List<Work> works)
@@ -152,18 +147,26 @@ namespace Car_Service_App
 
 
                 
-
                 //total Cost
                 Label label41 = new Label();
-                double totalCost = works[i].MaterialCost + (15000/60) * works[i].Time;
+                double timeCost=0;
+
+                if (works[i].Time % 30 == 0)
+                {
+                    timeCost = (15000 / 60) * works[i].Time;
+                }
+                else
+                {
+                    timeCost = (15000 / 2) * ((works[i].Time / 30) + 1);
+                }
+
+                double totalCost = works[i].MaterialCost + timeCost;
+
                 label41.Text = "0 Ft";
                 label41.Size = new Size(80, 40);
                 label41.Location = new Point(label3.Location.X + 140, label1.Location.Y);
                 totalCostsLabels.Add(label41);
                 totalCostsValue.Add(totalCost);
-
-
-
                 panel1.Controls.Add(label41);
 
 
@@ -208,6 +211,10 @@ namespace Car_Service_App
                     totalCostsLabels[i].Text = totalCostsValue[i].ToString() + " Ft";
                     materialCost += works[i].MaterialCost;
                     totalTimes += works[i].Time;
+                }
+                else
+                {
+                    totalCostsLabels[i].Text = "0 Ft";
                 }
             }
             

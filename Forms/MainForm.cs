@@ -56,7 +56,6 @@ namespace Car_Service_App
             Worksheet worksheet = new Worksheet();
             worksheet.renderWorks(works);
             worksheet.ShowDialog();
-            NoWorksheets++;
         }
 
         private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,10 +121,6 @@ namespace Car_Service_App
 						//Get the path of specified file
 						string filePath = openFileDialog.FileName;
 
-                        //Read the contents of the file into a stream
-
-                        var fileStream = openFileDialog.OpenFile();
-
                         Loader l = new Loader();
 						
 
@@ -149,9 +144,6 @@ namespace Car_Service_App
                     {
                         MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-					
-
 
                 }
             }
