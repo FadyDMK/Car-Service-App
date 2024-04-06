@@ -21,18 +21,27 @@ namespace Car_Service_App
         private List<CheckBox> checkBoxes = new List<CheckBox>();
         private List<Label> totalCostsLabels = new List<Label>();
         private List<double> totalCostsValue = new List<double>();
-
         private bool Saved ;
+        private double total = 0, materialCost = 0, timeCost = 0;
+        private int selectedWorks = 0;
+        private int totalTimes = 0;
+        private MainForm mainForm;
 
 
-        public static double total = 0, materialCost = 0, timeCost = 0;
-        public static int selectedWorks = 0;
-        public static int totalTimes = 0;
+        public double Total { get { return total; } set { total = value; } }
+        public double MaterialCost { get { return materialCost; } set { materialCost = value; } }
+        public double TimeCost { get { return TimeCost; } set { timeCost = value; } }
+        public int SelectedWorks { get { return selectedWorks; } set { selectedWorks = value; } }
+        public int TotalTimes { get { return totalTimes; } set { totalTimes = value; } }
 
 
-        public Worksheet()
+
+
+        public Worksheet(MainForm mainForm)
         {
             InitializeComponent();
+            total = 0; materialCost = 0; timeCost = 0;
+            this.mainForm = mainForm;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,7 +52,7 @@ namespace Car_Service_App
             this.Close();
         }
 
-        public static void Reset()
+        public void Reset()
         {
             materialCost = 0;
             timeCost = 0;
@@ -103,11 +112,12 @@ namespace Car_Service_App
         private void Worksheet_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(Saved)
-            {MainForm.totalMaterialCost += materialCost;
-            MainForm.totalTimeCost += timeCost;
-            MainForm.bigTotal += total;
-            MainForm.totalSelectedWorks += selectedWorks;
-            MainForm.bigTotaltime += totalTimes;
+            {
+                mainForm.TotalMaterialCost += materialCost;
+                mainForm.TotalTimeCost += timeCost;
+                mainForm.BigTotal += total;
+                mainForm.TotalSelectedWorks += selectedWorks;
+                mainForm.BigTotalTime += totalTimes;
                 Reset();
             }
         }

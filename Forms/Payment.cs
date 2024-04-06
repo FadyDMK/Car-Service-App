@@ -13,9 +13,12 @@ namespace Car_Service_App
 {
     public partial class Payment : Form
     {
-        public Payment()
+        private MainForm mainForm;
+
+        public Payment(MainForm mainForm)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -26,23 +29,31 @@ namespace Car_Service_App
         private void Payment_Load(object sender, EventArgs e)
         {
             //label5-8
-            label5.Text = MainForm.totalSelectedWorks.ToString() + " db";
+            
+
+            //total selected works
+            label5.Text = mainForm.TotalSelectedWorks.ToString() + " db";
             label5.ForeColor = Color.Orange;
 
-            label6.Text = MainForm.totalMaterialCost.ToString() + " Ft";
+            //total material cost
+            label6.Text = mainForm.TotalMaterialCost.ToString() + " Ft";
             label6.ForeColor = Color.Green;
 
-            label7.Text = MainForm.totalTimeCost.ToString() + " Ft";
+            //total cost for the time 
+            label7.Text = mainForm.TotalTimeCost.ToString() + " Ft";
             label7.ForeColor = Color.Red;
 
-            label8.Text = MainForm.bigTotal.ToString() + " Ft";
+            //big total
+            label8.Text = mainForm.BigTotal.ToString() + " Ft";
             label8.ForeColor = Color.CadetBlue;
 
+            //number of worksheets NoWorksheets
             label10.Text = MainForm.NoWorksheets.ToString() + " db";
             label10.ForeColor = Color.MediumPurple;
 
-            int hours = MainForm.bigTotaltime / 60;
-            int minutes = MainForm.bigTotaltime % 60;
+            
+            int hours = mainForm.BigTotalTime / 60;
+            int minutes = mainForm.BigTotalTime % 60;
             label12.Text = hours.ToString() + ":" + minutes.ToString();
 
 

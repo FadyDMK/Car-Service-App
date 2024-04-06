@@ -17,8 +17,14 @@ namespace Car_Service_App
         public List<Work> works = new List<Work>();
         public static int NoWorksheets { get; set; }
 
-        public static double bigTotal = 0, totalMaterialCost = 0, totalTimeCost = 0;
-        public static int totalSelectedWorks = 0 , bigTotaltime = 0;
+        private double bigTotal = 0, totalMaterialCost = 0, totalTimeCost = 0;
+        private int totalSelectedWorks = 0 , bigTotaltime = 0;
+
+        public double BigTotal { get { return bigTotal; } set {  bigTotal = value; } }
+        public double TotalMaterialCost { get { return totalMaterialCost;} set { totalMaterialCost = value; } }
+        public double TotalTimeCost { get { return totalTimeCost; } set { totalTimeCost = value; } }
+        public int TotalSelectedWorks { get { return totalSelectedWorks; } set { totalSelectedWorks = value; } }
+        public int BigTotalTime { get { return bigTotaltime;} set {  bigTotaltime = value; } }
 
 
 
@@ -53,14 +59,14 @@ namespace Car_Service_App
 
         private void worksheetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Worksheet worksheet = new Worksheet();
+            Worksheet worksheet = new Worksheet(this);
             worksheet.renderWorks(works);
             worksheet.ShowDialog();
         }
 
         private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Payment payment = new Payment();
+            Payment payment = new Payment(this);
             payment.ShowDialog();
             
             Reset();
