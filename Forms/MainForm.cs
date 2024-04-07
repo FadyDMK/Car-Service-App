@@ -83,9 +83,8 @@ namespace Car_Service_App
         private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
         {
             
-            if (ConfirmExit() == DialogResult.Yes)
-            { Application.ExitThread(); }
-            else { e.Cancel = true; }
+            if (ConfirmExit() == DialogResult.No)
+            { e.Cancel = true; }
         }
 
         
