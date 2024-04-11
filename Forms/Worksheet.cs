@@ -17,12 +17,12 @@ namespace Car_Service_App
     public partial class Worksheet : Form
     {
         //Work Properties: Name of work; Required time in minutes; Material costs
-        private List<Work> works = new List<Work>();
         private List<CheckBox> checkBoxes = new List<CheckBox>();
         private List<Label> totalCostsLabels = new List<Label>();
         private List<double> totalCostsValue = new List<double>();
+        private List<Work> works = new List<Work>();
 
-        private MainForm mainForm;
+
 
         private bool Saved;
 
@@ -101,15 +101,7 @@ namespace Car_Service_App
 
         private void Worksheet_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(Saved)
-            {
-                gdm.TotalMaterialCost += dm.MaterialCost;
-                gdm.TotalTimeCost += dm.TimeCost;
-                gdm.BigTotal += dm.Total;
-                gdm.TotalSelectedWorks += dm.SelectedWorks;
-                gdm.BigTotalTime += dm.TotalTimes;
-                dm.Reset();
-            }
+            dm.transfer(gdm, Saved);
         }
 
         internal void renderWorks(List<Work> works)
@@ -159,7 +151,6 @@ namespace Car_Service_App
                 {
                     timeCost = (15000 / 2) * ((works[i].Time / 30) + 1);
                 }
-
                 double totalCost = works[i].MaterialCost + timeCost;
 
                 label41.Text = "0 Ft";
@@ -189,37 +180,13 @@ namespace Car_Service_App
         private void CheckBox_Checked(object sender, EventArgs e)
         {
             CheckBox chkBox = (CheckBox)sender;
-            double materialCost = 0, timeCost = 0;
 
-
-            for (int i = 0; i < works.Count; i++)
-            {
-
-                if (checkBoxes[i].Checked)
-                {
-
-                    //All started 30 minutes are invoiced?
-                    if (works[i].Time % 30 == 0)
-                    {
-                        timeCost += (15000 / 60) * works[i].Time;
-                    }
-                    else
-                    {
-                        timeCost += (15000 / 2) * ((works[i].Time/30)+1);
-                    }
-
-                    totalCostsLabels[i].Text = totalCostsValue[i].ToString() + " Ft";
-                    materialCost += works[i].MaterialCost;
-                    dm.TotalTimes += works[i].Time;
-                }
-                else
-                {
-                    totalCostsLabels[i].Text = "0 Ft";
-                }
-            }
+            List<String> costs;
+            costs = dm.CalculateCosts(checkBoxes,works,totalCostsLabels,totalCostsValue);
             
-            label5.Text = materialCost.ToString() + " Ft";
-            label7.Text = timeCost.ToString() + " Ft";
+            label5.Text = costs[0];
+            label7.Text = costs[1];
+            costs.Clear();
         }
 
     }
