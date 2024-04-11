@@ -23,7 +23,6 @@ namespace Car_Service_App
         private List<Work> works = new List<Work>();
 
 
-
         private bool Saved;
 
 
@@ -183,7 +182,6 @@ namespace Car_Service_App
 
             List<String> costs;
             costs = dm.CalculateCosts(checkBoxes,works,totalCostsLabels,totalCostsValue);
-            
             label5.Text = costs[0];
             label7.Text = costs[1];
             costs.Clear();
