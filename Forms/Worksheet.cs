@@ -21,27 +21,24 @@ namespace Car_Service_App
         private List<CheckBox> checkBoxes = new List<CheckBox>();
         private List<Label> totalCostsLabels = new List<Label>();
         private List<double> totalCostsValue = new List<double>();
-        private bool Saved ;
-        private double total = 0, materialCost = 0, timeCost = 0;
-        private int selectedWorks = 0;
-        private int totalTimes = 0;
+
         private MainForm mainForm;
 
+        private bool Saved;
 
-        public double Total { get { return total; } set { total = value; } }
-        public double MaterialCost { get { return materialCost; } set { materialCost = value; } }
-        public double TimeCost { get { return timeCost; } set { timeCost = value; } }
-        public int SelectedWorks { get { return selectedWorks; } set { selectedWorks = value; } }
-        public int TotalTimes { get { return totalTimes; } set { totalTimes = value; } }
+
 
         GlobalDataManager gdm;
+        DataManager dm;
 
 
         public Worksheet(GlobalDataManager gdm)
         {
             InitializeComponent();
-            total = 0; materialCost = 0; timeCost = 0;
+
             this.gdm = gdm;
+            dm = new DataManager();
+            dm.Reset();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,28 +49,21 @@ namespace Car_Service_App
             this.Close();
         }
 
-        public void Reset()
-        {
-            materialCost = 0;
-            timeCost = 0;
-            selectedWorks = 0;
-        }
-
         private void Calculate()
         {
-            Reset();
+            dm.Reset();
 
             for (int i = 0; i < works.Count; i++)
             {
                 if (checkBoxes[i].Checked)
                 {
-                    selectedWorks++;
+                    dm.AddWorks();
 
                 }
             }
-            materialCost = Int32.Parse(this.label5.Text.Replace("Ft", "").Trim());
-            timeCost = Int32.Parse(this.label7.Text.Replace("Ft", "").Trim());
-            total = materialCost + timeCost;
+            dm.MaterialCost = Int32.Parse(this.label5.Text.Replace("Ft", "").Trim());
+            dm.TimeCost = Int32.Parse(this.label7.Text.Replace("Ft", "").Trim());
+            dm.Total= dm.MaterialCost + dm.TimeCost;
         }
 
 
@@ -91,8 +81,8 @@ namespace Car_Service_App
                     if (result == DialogResult.Yes)
                     {
                         Saved = false;
-                        Reset();
-                        totalTimes = 0;
+                        dm.Reset();
+                        dm.TotalTimes = 0;
                     }
                     else { e.Cancel = true; }
                 }
@@ -113,12 +103,12 @@ namespace Car_Service_App
         {
             if(Saved)
             {
-                gdm.TotalMaterialCost += materialCost;
-                gdm.TotalTimeCost += timeCost;
-                gdm.BigTotal += total;
-                gdm.TotalSelectedWorks += selectedWorks;
-                gdm.BigTotalTime += totalTimes;
-                Reset();
+                gdm.TotalMaterialCost += dm.MaterialCost;
+                gdm.TotalTimeCost += dm.TimeCost;
+                gdm.BigTotal += dm.Total;
+                gdm.TotalSelectedWorks += dm.SelectedWorks;
+                gdm.BigTotalTime += dm.TotalTimes;
+                dm.Reset();
             }
         }
 
@@ -220,7 +210,7 @@ namespace Car_Service_App
 
                     totalCostsLabels[i].Text = totalCostsValue[i].ToString() + " Ft";
                     materialCost += works[i].MaterialCost;
-                    totalTimes += works[i].Time;
+                    dm.TotalTimes += works[i].Time;
                 }
                 else
                 {
