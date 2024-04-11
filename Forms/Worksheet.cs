@@ -30,25 +30,25 @@ namespace Car_Service_App
 
         public double Total { get { return total; } set { total = value; } }
         public double MaterialCost { get { return materialCost; } set { materialCost = value; } }
-        public double TimeCost { get { return TimeCost; } set { timeCost = value; } }
+        public double TimeCost { get { return timeCost; } set { timeCost = value; } }
         public int SelectedWorks { get { return selectedWorks; } set { selectedWorks = value; } }
         public int TotalTimes { get { return totalTimes; } set { totalTimes = value; } }
 
+        GlobalDataManager gdm;
 
 
-
-        public Worksheet(MainForm mainForm)
+        public Worksheet(GlobalDataManager gdm)
         {
             InitializeComponent();
             total = 0; materialCost = 0; timeCost = 0;
-            this.mainForm = mainForm;
+            this.gdm = gdm;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Saved = true;
             Calculate();
-            MainForm.NoWorksheets++;
+            gdm.AddWorksheet();
             this.Close();
         }
 
@@ -113,11 +113,11 @@ namespace Car_Service_App
         {
             if(Saved)
             {
-                mainForm.TotalMaterialCost += materialCost;
-                mainForm.TotalTimeCost += timeCost;
-                mainForm.BigTotal += total;
-                mainForm.TotalSelectedWorks += selectedWorks;
-                mainForm.BigTotalTime += totalTimes;
+                gdm.TotalMaterialCost += materialCost;
+                gdm.TotalTimeCost += timeCost;
+                gdm.BigTotal += total;
+                gdm.TotalSelectedWorks += selectedWorks;
+                gdm.BigTotalTime += totalTimes;
                 Reset();
             }
         }

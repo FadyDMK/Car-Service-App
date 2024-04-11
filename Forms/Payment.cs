@@ -13,12 +13,12 @@ namespace Car_Service_App
 {
     public partial class Payment : Form
     {
-        private MainForm mainForm;
+        GlobalDataManager gdm;
 
-        public Payment(MainForm mainForm)
+        public Payment(GlobalDataManager gdm)
         {
             InitializeComponent();
-            this.mainForm = mainForm;
+            this.gdm = gdm;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -32,34 +32,31 @@ namespace Car_Service_App
             
 
             //total selected works
-            label5.Text = mainForm.TotalSelectedWorks.ToString() + " db";
+            label5.Text = gdm.TotalSelectedWorks.ToString() + " db";
             label5.ForeColor = Color.Orange;
 
             //total material cost
-            label6.Text = mainForm.TotalMaterialCost.ToString() + " Ft";
+            label6.Text = gdm.TotalMaterialCost.ToString() + " Ft";
             label6.ForeColor = Color.Green;
 
             //total cost for the time 
-            label7.Text = mainForm.TotalTimeCost.ToString() + " Ft";
+            label7.Text = gdm.TotalTimeCost.ToString() + " Ft";
             label7.ForeColor = Color.Red;
 
             //big total
-            label8.Text = mainForm.BigTotal.ToString() + " Ft";
+            label8.Text = gdm.BigTotal.ToString() + " Ft";
             label8.ForeColor = Color.CadetBlue;
 
             //number of worksheets NoWorksheets
-            label10.Text = MainForm.NoWorksheets.ToString() + " db";
+            label10.Text = gdm.NoWorksheets.ToString() + " db";
             label10.ForeColor = Color.MediumPurple;
 
             
-            int hours = mainForm.BigTotalTime / 60;
-            int minutes = mainForm.BigTotalTime % 60;
+            int hours = gdm.BigTotalTime / 60;
+            int minutes = gdm.BigTotalTime % 60;
             label12.Text = hours.ToString() + ":" + minutes.ToString();
 
 
-            //TODO u can use the worksheet button multiple times before
-            //pressing the payment
-            //payment should also mention how many times u used a worksheet to register work
 
 
 
